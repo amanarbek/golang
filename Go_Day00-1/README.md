@@ -78,3 +78,16 @@ to print, so need to implement this as well. By default it's all of them, but th
 a way to specify whether print just one, two or three specific metrics out of four when running
 the program (<ins>without recompilation</ins>(без перекомпиляции)). There is a <ins>built-in module</ins>(встроенный модуль) in standard library that allows you 
 <ins>to parse additional parameters</ins>(разбирать дополнительные параметры).
+
+### Чеклист 
+
+- [ ] Функция считывания из стандартного потока.
+- [ ] Обработка ошибок считанного.
+- [ ] Сортировка полученного массива чисел.
+- [ ] Функция вычисления среднего арифметического значения (mean).
+- [ ] Функция определения частотного числа в массиве (mode).
+- [ ] Реализовать 2 функции для вычисления стандартного отклонения:
+  - [ ] Выборка (sample standard deviation).
+  - [ ] Генеральная совокупность (population standard deviation).
+- [ ] Реализовать работу с флагами для выбора какие поля выводить.
+- [ ] Использовать многопоточность для вычисления значений.
