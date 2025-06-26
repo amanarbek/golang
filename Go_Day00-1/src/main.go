@@ -43,6 +43,26 @@ func sumSliceInt(nums []int) int {
 	return sum
 }
 
+// Функция нахождения частотного числа
+func findFrequencyNum(nums []int) int {
+	var count int
+	freq := make(map[int]int)
+	for _, num := range nums {
+		freq[num]++
+		if freq[num] > count {
+			count = freq[num]
+		}
+	}
+	mostCommon := make([]int, 0, 5)
+	for k, v := range freq {
+		if v == count {
+			mostCommon = append(mostCommon, k)
+		}
+	}
+	sort.Ints(mostCommon)
+	return mostCommon[0]
+}
+
 func main() {
 	var mean, median, mode, sd float64
 	input := readInput()
@@ -63,4 +83,8 @@ func main() {
 		middle := len / 2
 		median = float64(numbers[middle-1]+numbers[middle]) / 2
 	}
+	// Вычисление частотного числа в слайсе
+	mode = float64(findFrequencyNum(numbers))
+	// Просто вывод. Временно
+	fmt.Println(mean, median, mode, sd)
 }
