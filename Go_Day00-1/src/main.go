@@ -53,4 +53,14 @@ func main() {
 	}
 	// Получаем среднее значение
 	mean = float64(sumSliceInt(numbers)) / float64(len(numbers))
+	// Находим медиану слайса.
+	len := len(numbers)
+	// Если длина слайса нечетная то len(slice)/2+1
+	if len%2 > 0 {
+		median = float64(numbers[int(len/2)+1])
+	} else {
+		// иначе len(slice)/2 + len(slice)/2-1
+		middle := len / 2
+		median = float64(numbers[middle-1]+numbers[middle]) / 2
+	}
 }
