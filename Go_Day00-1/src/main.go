@@ -34,12 +34,23 @@ func checkInput(in string) ([]int, error) {
 	return numbers, nil
 }
 
+// Суммирование массива чисел
+func sumSliceInt(nums []int) int {
+	sum := 0
+	for _, v := range nums {
+		sum += v
+	}
+	return sum
+}
+
 func main() {
+	var mean, median, mode, sd float64
 	input := readInput()
 	numbers, err := checkInput(input)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return
 	}
-	fmt.Println(numbers)
+	// Получаем среднее значение
+	mean = float64(sumSliceInt(numbers)) / float64(len(numbers))
 }
