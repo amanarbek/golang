@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"sort"
 	"strconv"
@@ -63,8 +64,33 @@ func findFrequencyNum(nums []int) int {
 	return mostCommon[0]
 }
 
+// Считает средние арифметическое
+func calculateMean(nums []int) float64 {
+	return float64(sumSliceInt(nums)) / float64(len(nums))
+}
+
+// Сумма квадратичного отклонения всех элементов
+func squaredDeviationsSum(nums []int, mean float64) float64 {
+	var output float64
+	for _, v := range nums {
+		output += math.Pow(float64(v)-mean, 2)
+	}
+	return output
+}
+
+// Стандартное отклонение по генеральной совокупности
+func populationSD(nums []int, mean float64) float64 {
+	return math.Sqrt(squaredDeviationsSum(nums, mean) / float64(len(nums)))
+}
+
+// Стандартное отклонение по выборке
+func sampleSD(nums []int, mean float64) float64 {
+	return math.Sqrt(squaredDeviationsSum(nums, mean) / float64(len(nums)-1))
+}
+
 func main() {
-	var mean, median, mode, sd float64
+	var mean, median, sd float64
+	var mode int
 	input := readInput()
 	numbers, err := checkInput(input)
 	if err != nil {
@@ -72,7 +98,7 @@ func main() {
 		return
 	}
 	// Получаем среднее значение
-	mean = float64(sumSliceInt(numbers)) / float64(len(numbers))
+	mean = calculateMean(numbers)
 	// Находим медиану слайса.
 	len := len(numbers)
 	// Если длина слайса нечетная то len(slice)/2+1
@@ -84,7 +110,12 @@ func main() {
 		median = float64(numbers[middle-1]+numbers[middle]) / 2
 	}
 	// Вычисление частотного числа в слайсе
-	mode = float64(findFrequencyNum(numbers))
+	mode = findFrequencyNum(numbers)
+	// Стандартное отклонение. Буду использовать Стандартное отклонение по генеральной совокупности.
+	sd = populationSD(numbers, mean)
 	// Просто вывод. Временно
-	fmt.Println(mean, median, mode, sd)
+	fmt.Printf(
+		"Mean: %.1f\nMedian: %.1f\nMode: %d\nSD: %.2f\n",
+		mean, median, mode, sd,
+	)
 }
