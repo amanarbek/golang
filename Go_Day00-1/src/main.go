@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"math"
 	"os"
@@ -91,6 +92,12 @@ func sampleSD(nums []int, mean float64) float64 {
 func main() {
 	var mean, median, sd float64
 	var mode int
+	output := make([]string, 0, 4)
+
+	// Добавил флаги
+	fields := flag.String("f", "1234", "Передав флаг можно указать какие поля выводить. По умолчанию все 4 выводит.")
+	flag.Parse()
+
 	input := readInput()
 	numbers, err := checkInput(input)
 	if err != nil {
@@ -113,9 +120,21 @@ func main() {
 	mode = findFrequencyNum(numbers)
 	// Стандартное отклонение. Буду использовать Стандартное отклонение по генеральной совокупности.
 	sd = populationSD(numbers, mean)
-	// Просто вывод. Временно
-	fmt.Printf(
-		"Mean: %.1f\nMedian: %.1f\nMode: %d\nSD: %.2f\n",
-		mean, median, mode, sd,
-	)
+	// Вывод
+	if strings.Contains(*fields, "1") {
+		output = append(output, fmt.Sprintf("Mean: %.1f\n", mean))
+	}
+	if strings.Contains(*fields, "2") {
+		output = append(output, fmt.Sprintf("Median: %.1f\n", median))
+	}
+	if strings.Contains(*fields, "3") {
+		output = append(output, fmt.Sprintf("Mode: %d\n", mode))
+	}
+	if strings.Contains(*fields, "4") {
+		output = append(output, fmt.Sprintf("SD: %.2f\n", sd))
+	}
+
+	for _, out := range output {
+		fmt.Print(out)
+	}
 }
