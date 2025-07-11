@@ -23,10 +23,16 @@ build2:
 build3:
 	go build -o ./exercise002/$(BINARY) $(SRC)/exercise02
 
-# Тесты
+# Тесты reader
 .PHONY: test
 test:
 	go test -v ./...
+
+# Тест run
+.PHONY: testrun
+testrun:
+	./exercise00/$(BINARY) -f recipes/recipes.json
+	./exercise00/$(BINARY) -f recipes/recipes.xml
 
 # Очистка полная
 .PHONY: cleanall
