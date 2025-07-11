@@ -1,12 +1,13 @@
-package main
+package reading
 
 import (
 	"errors"
 	"path/filepath"
+	"project/models"
 )
 
 type DBReader interface {
-	Read(filename string) (*Recipes, error)
+	Read(filename string) (*models.Recipes, error)
 }
 
 func GetReader(filename string) (DBReader, error) {

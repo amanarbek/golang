@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"path/filepath"
+	"project/reading"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 		return
 	}
 
-	dbReader, err := GetReader(*file)
+	dbReader, err := reading.GetReader(*file)
 	if err != nil {
 		fmt.Println("Не удалось прочесть файл")
 		return
