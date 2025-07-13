@@ -1,0 +1,2 @@
+Go_Day01-1/src/exercise02/main.go
+Go_Day01-1/src/exercise02/test.txt
