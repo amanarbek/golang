@@ -34,7 +34,11 @@ test2:
 # Сборка третьего задания
 .PHONY: build3
 build3:
-	go build -o ./exercise002/compareDB $(SRC)/exercise02
+	go build -o ./exercise02/$(THIRD) $(SRC)/exercise02
+
+.PHONY: test3
+test3:
+	./exercise02/$(THIRD) --old exercise02/snapshot1.txt --new exercise02/snapshot2.txt
 
 # Тесты reader
 .PHONY: test
